@@ -37,7 +37,7 @@ img2;
 var img3 = document.getElementById('img3');
 img3;
 //make for var i loop to go through array
-randoProductImg();
+randoProductImg(products.length);
 
 function randoProductImg() {
   var index = Math.floor(Math.random() * 20);

@@ -1,13 +1,14 @@
 # Technical Requirements
 
-One html page.
-1. three random images from array pop up
-  a. user clicks
-  b. data of image clicked goes to local storage and populates placeholder
-2. page refreshes with three different images
-3. Steps a & b repeat for a total of 25 clicks
-4. Images do not refresh
-5. data from local storage populates a chart
+One html page:
+1. create a constructor that creates product objects for me.
+2. create array of product objects
+3. create functions that pull three random images from the products array then
+  a.  a listener that counts user clicks on each object
+  b.  a function that pushes data of image clicked goes to local storage and populates placeholder
+4. page needs to refresh with three different images
+5. a function that recreates steps a & b repeat for a total of 25 clicks then stops images from refreshing after 25th click
+5. a function that pulls data from local storage populates a chart.
 
 JavaScript includes logic for randomizing pictures.
 
