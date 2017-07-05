@@ -1,39 +1,65 @@
 'use strict';
 
-//////==the base assignment==/////////////
-//make constructor function
-//this.name
-//this.path
-//this.clicks 0;
-//this.views 0;
+// function Product(productName, path) {
+//   this.productName = productName;
+//   this.path = path;
+// }
+//array
+var products = ['babySweep', 'bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
+console.log(products);
+var img1 = document.getElementById('img1');
+var img2 = document.getElementById('img2');
+var img3 = document.getElementById('img3');
+var productImagesParent = document.getElementById('imgParent');
 
-////====access content====////
-//access content select element
-//var clicks
-//var views
-//var final views =25
+function setup() {
+  img1 = generateRandomProduct();
+  img2 = generateRandomProduct();
+  img3 = generateRandomProduct();
+  renderImg1(img1);
+  renderImg2(img2);
+  renderImg3(img3);
+}
 
-//getElementById lt img
-//var left image
+setup();
 
-//getElementById rt img
-//var right image
+function generateRandomProduct() {
+  var index = Math.floor(Math.random() * products.length);
+  return products[index];
+  //make math random to choose random pics
+}
 
-//getElementById ct img
-//var center image
+function renderImg1(img1) {
+  var img = document.createElement('img');
+  img.setAttribute('src', 'img/' + img1 + '.jpg');
+  img.setAttribute('id', img1);
+  img.setAttribute('width', '200px');
+  img.setAttribute('height', '200px');
+  productImagesParent.appendChild(img);
+}
 
-//make for var i loop to go through array
-//make math random to choose random pics
+function renderImg2(img2) {
+  var img = document.createElement('img');
+  img.setAttribute('src', 'img/' + img2 + '.jpg');
+  img.setAttribute('id', img2);
+  img.setAttribute('width', '200px');
+  img.setAttribute('height', '200px');
+  productImagesParent.appendChild(img);
+}
 
-
+function renderImg3(img3) {
+  var img = document.createElement('img');
+  img.setAttribute('src', 'img/' + img3 + '.jpg');
+  img.setAttribute('id', img3);
+  img.setAttribute('width', '200px');
+  img.setAttribute('height', '200px');
+  productImagesParent.appendChild(img);
+}
 //make products array
 
-//parent?
-//get placehoder id from html
-
 ////====modify content====////
-//render_random-image-to-page-append-Child
-
+//get placehoder id from html
+//render random image to page - appendChild
 
 //====program rules====//
 //refresh page after click
@@ -50,3 +76,6 @@
 
 ///////==animation==/////
 ///in html/css at least one CSS transition/animation of your choice.
+
+//notes from Stephanie
+// what your functions expect as parameters, and what you're passing them. A method on an object knows about the object it's attached to, so you frequently don't need to pass it anything. Also, you reference productplaceImg, but I don't see it defined anywhere. And...what is pushImg? Looks like it's not used.
