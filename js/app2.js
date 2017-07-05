@@ -39,27 +39,22 @@ img3;
 //make for var i loop to go through array
 randoProductImg();
 
-function randoProductImg(products) {
-  for (var i = 0; i < 20; i++);
-  var index = Math.floor(Math.random() * randoProductImg.length);
+function randoProductImg() {
+  var index = Math.floor(Math.random() * 20);
   return index;
-  console.log(products);
   //make math random to choose random pics
 }
 
+var productplaceImg;
 
 function render(randoProductImg) {
-  do {
-    var pushImg =
-      document.getElementById('img' + i);
-    productplaceImg.setAttribute('src', randoProductImg.path);
-    productplaceImg.setAttribute('width', '200px');
-    productplaceImg.setAttribute('height', '200px');
-    document.body.appendChild(productplaceImg);
-    console.log(pushImg);
-  } while (i = 0, i < 3, i++);
-};
-console.log(render);
+  for (var i = 0; i < 3; i++);
+  document.getElementById('img' + i);
+  productplaceImg.setAttribute('src', randoProductImg.path);
+  productplaceImg.setAttribute('width', '200px');
+  productplaceImg.setAttribute('height', '200px');
+  document.body.appendChild(productplaceImg);
+}
 //make products array
 var products = [
   new Product('babySweep', 'img/babySweep.jpg', 0, 0),
@@ -103,3 +98,6 @@ console.log(products);
 
 ///////==animation==/////
 ///in html/css at least one CSS transition/animation of your choice.
+
+//notes from Stephanie
+// what your functions expect as parameters, and what you're passing them. A method on an object knows about the object it's attached to, so you frequently don't need to pass it anything. Also, you reference productplaceImg, but I don't see it defined anywhere. And...what is pushImg? Looks like it's not used.
