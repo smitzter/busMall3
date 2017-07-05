@@ -17,6 +17,8 @@ var img3 = document.getElementById('img3');
 var productImagesParent = document.getElementById('imgParent');
 var attemptsEl = document.getElementById('attempts');
 
+
+
 function setup() {
   img1 = generateRandomProduct();
   img2 = generateRandomProduct();
@@ -24,19 +26,21 @@ function setup() {
   renderImg1(img1);
   renderImg2(img2);
   renderImg3(img3);
-  // updateScore();
+//update per product
+if (attempts) {
+  productImagesParent.removeChild(productImagesParent.lastChild);
+  productImagesParent.removeChild(productImagesParent.lastChild);
+  productImagesParent.removeChild(productImagesParent.lastChild);
+}
   updateAttempts();
 }
 
 setup();
 
 imgParent.addEventListener('click', function(event) {
-  if (attempts === maxAttempts) {
-    return;
-  }
-
-  var answer = event.target.getAttribute('id');
-  attempts++;
+  if (attempts != maxAttempts) {
+    var answer = event.target.getAttribute('id');
+    attempts++;
 
   if (answer != []) {
     alert('please click on image');
@@ -85,10 +89,11 @@ imgParent.addEventListener('click', function(event) {
     alert('please click on image');
   };
 
-  if (attempts === maxAttempts) {
+    if (attempts === maxAttempts) {
     // do things
-    // draw();
-    chart();
+      draw();
+      chart();
+    }
   }
 });
 
@@ -125,6 +130,69 @@ function renderImg3(img3) {
   productImagesParent.appendChild(img);
 }
 
+
+//localStorage//
+function incrementAttempts () {
+  var attempts = getAttempts();
+  attempts++
+  createOrUpdateAttempts(attempts);
+  updateAttemptsElement();
+}
+
+function updateAttemptsElement () {
+  attemptsElement.textContent = getAttempts() || 0;
+}
+
+function getAttempts () {
+  var attempts = localStorage.getItem('attempts');
+  if (attempts !== null) {
+    attempts = parseInt(attempts);
+  }
+  return attempts;
+}
+
+function createOrUpdateAttempts (value) {
+  value = value.toString();
+  localStorage.setItem('attempts', value);
+  var attempts = localStorage.getItem('attempts');
+  return attempts;
+}
+
+function deleteAttempts () {
+  localStorage.removeItem('attempts');
+  return null;
+}
+
+function getProductState () {
+  var storageProductState = localStorage.getItem('ProductState');
+  //unstringify it
+  var parsedProductState = JSON.parse(storageProductState);
+  return parsedProductState;
+}
+
+function createOrUpdateProductState (correctProduct, wrongProduct) {
+  var ProductState = {
+    correctProduct: correctProduct,
+    wrongProduct: wrongProduct
+  };
+  // convert to a stringified format
+  var stringifiedProductState = JSON.stringify(ProductState);
+  localStorage.setItem('ProductState', stringifiedProductState);
+  var storageProductState = localStorage.getItem('ProductState');
+  //unstringify it
+  var parsedProductState = JSON.parse(storageProductState);
+  return parsedProductState;
+}
+
+function deleteProductState () {
+  localStorage.removeItem('productState');
+}
+
+function clearAllData () {
+  localStorage.clear();
+  return null;
+}
+
 function updateAttempts() {
   attemptsEl.textContent = maxAttempts - attempts;
 }
@@ -132,20 +200,22 @@ function updateAttempts() {
 function chart() {
   var canvas = document.getElementById('chart');
   var ctx = canvas.getContext('2d');
+  var something = getSomething();
+  //i want to get how many times the obj in the array was clicked
 }
 
 var chart = new Chart(ctx, {
-  // The type of chart we want to create
+  // The type of chart
   type: 'bar',
 
   // The data for our dataset
   data: {
-    labels: ['Score', 'Attempts'],
+    labels: ['Product Name'],
     datasets: [{
-      label: 'Number of Correct Answers',
+      label: 'Clicks',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
-      data: [score, maxAttempts],
+      data: [productClicks, maxAttempts],
     }]
   },
 
@@ -172,7 +242,7 @@ function draw() {
   ctx.fillStyle = '#cf2663';
   ctx.fillRect(80, 10, 20, 100);
 
-  ctx.fillText('My string', 10, 100);
+  ctx.fillText('Product', 10, 100);
 }
 
 //make products array
