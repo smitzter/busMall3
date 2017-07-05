@@ -1,84 +1,182 @@
 'use strict';
 
-//////the base assignment/////////////
-//make constructor function
-//this.name
-//this.path
-//this.clicks 0;
-//this.views 0;
-function Product(productName, path) {
-  this.productName = productName;
-  this.path = path;
-  this.clicks = 0;
-  this.views = 0;
-};
+// function Product(productName, path) {
+//   this.productName = productName;
+//   this.path = path;
+// }
+//array
+var products = ['babySweep', 'bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
+console.log(products);
 
-Product.prototype.render = render;
-Product.prototype.pushToArray = function() {
-  products.push(this);
-};
+var attempts = 0;
+var maxAttempts = 25;
 
-////====access content====////
-//access content select element
-//var clicks?
-//var views?
-//var final views =25?
-
-//getElementById lt img
-//var left image
 var img1 = document.getElementById('img1');
-img1;
-//getElementById rt img
-//var right image
 var img2 = document.getElementById('img2');
-img2;
-//getElementById ct img
-//var center image
 var img3 = document.getElementById('img3');
-img3;
-//make for var i loop to go through array
-randoProductImg(products.length);
+var productImagesParent = document.getElementById('imgParent');
+var attemptsEl = document.getElementById('attempts');
 
-function randoProductImg() {
-  var index = Math.floor(Math.random() * 20);
-  return index;
+function setup() {
+  img1 = generateRandomProduct();
+  img2 = generateRandomProduct();
+  img3 = generateRandomProduct();
+  renderImg1(img1);
+  renderImg2(img2);
+  renderImg3(img3);
+  // updateScore();
+  updateAttempts();
+}
+
+setup();
+
+imgParent.addEventListener('click', function(event) {
+  if (attempts === maxAttempts) {
+    return;
+  }
+
+  var answer = event.target.getAttribute('id');
+  attempts++;
+
+  if (answer != []) {
+    alert('please click on image');
+  }
+  if (answer === [0]) {
+    babySweep++;
+  } else if (answer === [1]) {
+    bag++;
+  } else if (answer === [2]) {
+    banana++;
+  } else if (answer === [3]) {
+    bathroom++;
+  } else if (answer === [4]) {
+    boots++;
+  } else if (answer === [5]) {
+    breakfast++;
+  } else if (answer === [6]) {
+    bubblegum++;
+  } else if (answer === [7]) {
+    chair++;
+  } else if (answer === [8]) {
+    cthulhu++;
+  } else if (answer === [9]) {
+    dogDuck++;
+  } else if (answer === [10]) {
+    dragon++;
+  } else if (answer === [11]) {
+    pen++;
+  } else if (answer === [12]) {
+    petSweep++;
+  } else if (answer === [13]) {
+    scissors++;
+  } else if (answer === [14]) {
+    shark++;
+  } else if (answer === [15]) {
+    tauntaun++;
+  } else if (answer === [16]) {
+    unicorn++;
+  } else if (answer === [17]) {
+    usb++;
+  } else if (answer === [18]) {
+    waterCan++;
+  } else if (answer === [19]) {
+    wineGlass++;
+  } else {
+    alert('please click on image');
+  };
+
+  if (attempts === maxAttempts) {
+    // do things
+    // draw();
+    chart();
+  }
+});
+
+function generateRandomProduct() {
+  var index = Math.floor(Math.random() * products.length);
+  return products[index];
   //make math random to choose random pics
 }
 
-var productplaceImg;
-
-function render(randoProductImg) {
-  for (var i = 0; i < 3; i++);
-  document.getElementById('img' + i);
-  productplaceImg.setAttribute('src', randoProductImg.path);
-  productplaceImg.setAttribute('width', '200px');
-  productplaceImg.setAttribute('height', '200px');
-  document.body.appendChild(productplaceImg);
+function renderImg1(img1) {
+  var img = document.createElement('img');
+  img.setAttribute('src', 'img/' + img1 + '.jpg');
+  img.setAttribute('id', img1);
+  img.setAttribute('width', '200px');
+  img.setAttribute('height', '200px');
+  productImagesParent.appendChild(img);
 }
+
+function renderImg2(img2) {
+  var img = document.createElement('img');
+  img.setAttribute('src', 'img/' + img2 + '.jpg');
+  img.setAttribute('id', img2);
+  img.setAttribute('width', '200px');
+  img.setAttribute('height', '200px');
+  productImagesParent.appendChild(img);
+}
+
+function renderImg3(img3) {
+  var img = document.createElement('img');
+  img.setAttribute('src', 'img/' + img3 + '.jpg');
+  img.setAttribute('id', img3);
+  img.setAttribute('width', '200px');
+  img.setAttribute('height', '200px');
+  productImagesParent.appendChild(img);
+}
+
+function updateAttempts() {
+  attemptsEl.textContent = maxAttempts - attempts;
+}
+
+function chart() {
+  var canvas = document.getElementById('chart');
+  var ctx = canvas.getContext('2d');
+}
+
+var chart = new Chart(ctx, {
+  // The type of chart we want to create
+  type: 'bar',
+
+  // The data for our dataset
+  data: {
+    labels: ['Score', 'Attempts'],
+    datasets: [{
+      label: 'Number of Correct Answers',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [score, maxAttempts],
+    }]
+  },
+
+  // Configuration options go here
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+
+
+function draw() {
+  var canvas = document.getElementById('chart');
+  var ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#26b7cf';
+  ctx.fillRect(10, 10, 20, 100);
+
+  ctx.fillStyle = '#cf2663';
+  ctx.fillRect(80, 10, 20, 100);
+
+  ctx.fillText('My string', 10, 100);
+}
+
 //make products array
-var products = [
-  new Product('babySweep', 'img/babySweep.jpg', 0, 0),
-  new Product('bag', 'img/bag.jpg', 0, 0),
-  new Product('banana', 'img/banana.jpg', 0, 0),
-  new Product('bathroom', 'img/bathroom.jpg', 0, 0),
-  new Product('boots', 'img/boots.jpg', 0, 0),
-  new Product('breakfast', 'img/breakfast.jpg', 0, 0),
-  new Product('bubblegum', 'img/bubblegum.jpg', 0, 0),
-  new Product('chair', 'img/chair.jpg', 0, 0),
-  new Product('cthulhu', 'img/cthulhu.jpg', 0, 0),
-  new Product('dogDuck', 'img/dogDuck.jpg', 0, 0),
-  new Product('dragon', 'img/dragon.jpg', 0, 0),
-  new Product('pen', 'img/pen.jpg', 0, 0),
-  new Product('petSweep', 'img/petSweep.jpg', 0, 0),
-  new Product('scissors', 'img/scissors.jpg', 0, 0),
-  new Product('shark', 'img/shark.jpg', 0, 0),
-  new Product('tauntaun', 'img/tauntaun.jpg', 0, 0),
-  new Product('unicorn', 'img/unicorn.jpg', 0, 0),
-  new Product('usb', 'img/usb.jpg', 0, 0),
-  new Product('waterCan', 'img/waterCan.jpg', 0, 0),
-  new Product('wineGlass', 'img/wineGlass.jpg', 0, 0)
-];
-console.log(products);
+
 ////====modify content====////
 //get placehoder id from html
 //render random image to page - appendChild
