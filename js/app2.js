@@ -69,7 +69,7 @@ function clickedEventListener(event) {
 
     // if (answer != []) {
     //   alert('please click on image');
-    // }
+    }
     if (answer === products[0]) {
       babySweep.clicked++;
       babySweep.createOrUpdateClicks();
@@ -181,10 +181,10 @@ function renderImg3() {
 
 
 //localStorage//
-createOrUpdateClicks();
-
-function createOrUpdateClicks() {
-  for (var i = 0; i < products.length; i++) {
+// createOrUpdateClicks();
+//
+// function createOrUpdateClicks() {
+//   for (var i = 0; i < products.length; i++) {
     //     var storeStats = localStorage.getItem('stats')
     //     var stringifiedStats = JSON.stringify(stats);
     //     localStorage.setItem('stats', stringifiedStats);
@@ -196,30 +196,35 @@ function createOrUpdateClicks() {
     //   }
     // }
     // stringStats();
-    incrementClicks();
 
-    function incrementClicks() {
-      var clicked = getClicks();
-      createOrUpdateClicks(clicked);
-      clickedEl.textContent = getClicks() || 0;
-    }
+////////////////////////////////////////////////
+//     incrementClicks();
+//
+//     function incrementClicks() {
+//       var clicked = getClicks();
+//       createOrUpdateClicks(clicked);
+//       clickedEl.textContent = getClicks() || 0;
+//     }
+//
+//     function getClicks() {
+//       var clicked = localStorage.getItem('clickedEL');
+//       if (clicked !== null) {
+//         clicked = parseInt(clicked);
+//       }
+//       return clicked;
+//     }
+//
+//     function createOrUpdateClicks() {
+//       // value = this.toString();
+//       localStorage.setItem('clickedEl', clicks);
+//       var clicked = localStorage.getItem('clickedEl');
+//       return clicked;
+//     }
+//   }
+// }
 
-    function getClicks() {
-      var clicked = localStorage.getItem('clickedEL');
-      if (clicked !== null) {
-        clicked = parseInt(clicked);
-      }
-      return clicked;
-    }
+//////////////////////////////////////////////
 
-    function createOrUpdateClicks() {
-      value = this.toString();
-      localStorage.setItem('clickedEl', value);
-      var clicked = localStorage.getItem('clickedEl');
-      return clicked;
-    }
-  }
-}
 //////attempts
 
 function incrementAttempts() {
