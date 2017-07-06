@@ -3,7 +3,7 @@
 var products = ['babySweep', 'bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
 console.log(products);
 var attempts = 0;
-var maxAttempts = 5;
+var maxAttempts = 25;
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
@@ -18,8 +18,7 @@ function setup() {
   img1 = generateRandomProduct();
   img2 = generateRandomProduct();
   img3 = generateRandomProduct();
-  //update per product
-  if (attempts < maxAttempts) {
+  if (attempts === maxAttempts) {
     productImagesParent.removeChild(productImagesParent.lastChild);
     productImagesParent.removeChild(productImagesParent.lastChild);
     productImagesParent.removeChild(productImagesParent.lastChild);
@@ -40,6 +39,7 @@ function clickedEventListener(event) {
   var answer = event.target.id;
   attempts++;
   incrementAttempts();
+  setup();
   if (answer === maxAttempts) {
     renderResponse('25 reached');
   } else {
@@ -52,8 +52,7 @@ function renderResponse (response) {
 }
 function incrementAttempts() {
   var attempts = getAttempts();
-  createOrUpdateAttempts(attempts);
-  updateAttemptsElement();
+  updateAttemptsElement(attempts);
 }
 
 function updateAttemptsElement() {
@@ -65,13 +64,6 @@ function getAttempts() {
   if (attempts !== null) {
     attempts = parseInt(attempts);
   }
-  return attempts;
-}
-
-function createOrUpdateAttempts(value) {
-  value = value.toString();
-  localStorage.setItem('attemptsEl', value);
-  var attempts = localStorage.getItem('attemptsEl');
   return attempts;
 }
 
