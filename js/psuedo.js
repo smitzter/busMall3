@@ -44,6 +44,7 @@
 //store local data
 //retrieve local data
 
+
 /////////==the chart==///////////////////
 //create code to follow clicks, event listener
 //store clicks in local storage, event handler
