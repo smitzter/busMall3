@@ -45,8 +45,10 @@
 //retrieve local data
 
 /////////==the chart==///////////////////
-//make code to follow clicks, event listener
-//make code to display clicks in table
+//create code to follow clicks, event listener
+//store clicks in local storage, event handler
+//retrieve from local storage
+//create code to display clicks in table
 
 ///////==animation==/////
 ///in html/css at least one CSS transition/animation of your choice.
