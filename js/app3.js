@@ -7,21 +7,83 @@
 //array
 var products = ['babySweep', 'bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
 console.log(products);
+var attempts = 0;
+var maxAttempts = 25;
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
 var productImagesParent = document.getElementById('imgParent');
+var responseElement = document.getElementById('response');
+
+setup();
+
+imgParent.addEventListener('click', clickedEventListener);
 
 function setup() {
   img1 = generateRandomProduct();
   img2 = generateRandomProduct();
   img3 = generateRandomProduct();
+  //update per product
+  if (attempts < maxAttempts) {
+    productImagesParent.removeChild(productImagesParent.lastChild);
+    productImagesParent.removeChild(productImagesParent.lastChild);
+    productImagesParent.removeChild(productImagesParent.lastChild);
+  }
   renderImg1(img1);
   renderImg2(img2);
   renderImg3(img3);
+  // updateAttempts();
+  if (attempts === maxAttempts) {
+    // do things
+    imgParent.removeEventListener('click', clickedEventListener);
+  }
 }
 
-setup();
+function clickedEventListener(event) {
+  if (attempts === maxAttempts) {
+    return;
+  }
+  var answer = event.target.id;
+  attempts++;
+  incrementAttempts();
+  if (answer === maxAttempts) {
+    renderResponse('25 reached');
+  } else {
+    renderResponse('not 25 yet');
+  }
+}
+
+function renderResponse (response) {
+  responseElement.textContent = response;
+}
+function incrementAttempts() {
+  var attempts = getAttempts();
+  attempts++;
+  createOrUpdateAttempts(attempts);
+  updateAttemptsElement();
+}
+
+function updateAttemptsElement() {
+  imgParent.textContent = getAttempts() || 0;
+}
+
+function getAttempts() {
+  var attempts = localStorage.getItem('attemptsEl');
+  if (attempts !== null) {
+    attempts = parseInt(attempts);
+  }
+  return attempts;
+}
+
+function createOrUpdateAttempts(value) {
+  value = value.toString();
+  localStorage.setItem('attemptsEl', value);
+  var attempts = localStorage.getItem('attemptsEl');
+  return attempts;
+}
+// function updateAttempts() {
+//   attemptsEl.textContent = maxAttempts - attempts;
+// }
 
 function generateRandomProduct() {
   var index = Math.floor(Math.random() * products.length);

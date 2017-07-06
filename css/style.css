@@ -2,3 +2,27 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.animation {
+  width: 400px;
+  height: 400px;
+}
+@keyframes blinkAnimation {
+  0% {
+
+    color: #000000;
+  }
+  50% {
+    color: #ffffff;
+  }
+  100% {
+    color: #ff0000;
+  }
+}
+
+.blink {
+  animation-name: blinkAnimation;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(3);
+  animation-duration: 500ms;
+}
