@@ -2,7 +2,7 @@
 
 var products = ['babySweep', 'bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
 console.log(products);
-var attempts = 0;
+var attempts = '';
 var maxAttempts = 25;
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
@@ -18,7 +18,7 @@ function setup() {
   img1 = generateRandomProduct();
   img2 = generateRandomProduct();
   img3 = generateRandomProduct();
-  if (attempts === maxAttempts) {
+  if (attempts <= maxAttempts) {
     productImagesParent.removeChild(productImagesParent.lastChild);
     productImagesParent.removeChild(productImagesParent.lastChild);
     productImagesParent.removeChild(productImagesParent.lastChild);
@@ -33,14 +33,14 @@ function setup() {
 }
 
 function clickedEventListener(event) {
+  var productClicked = event.target.id;
+  attempts++;
+  console.log('infunc: ' + productClicked);
+  console.log(attempts);
+  setup();
+
   if (attempts === maxAttempts) {
     return;
-  }
-  var answer = event.target.id;
-  attempts++;
-  incrementAttempts();
-  setup();
-  if (answer === maxAttempts) {
     renderResponse('25 reached');
   } else {
     renderResponse('not 25 yet');
@@ -50,22 +50,7 @@ function clickedEventListener(event) {
 function renderResponse (response) {
   responseElement.textContent = response;
 }
-function incrementAttempts() {
-  var attempts = getAttempts();
-  updateAttemptsElement(attempts);
-}
 
-function updateAttemptsElement() {
-  productImagesParent.textContent = getAttempts() || 0;
-}
-
-function getAttempts() {
-  var attempts = localStorage.getItem('attemptsEl');
-  if (attempts !== null) {
-    attempts = parseInt(attempts);
-  }
-  return attempts;
-}
 
 function generateRandomProduct() {
   var index = Math.floor(Math.random() * products.length);
