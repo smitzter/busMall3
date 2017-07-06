@@ -52,7 +52,6 @@ function renderResponse (response) {
 }
 function incrementAttempts() {
   var attempts = getAttempts();
-  attempts++;
   createOrUpdateAttempts(attempts);
   updateAttemptsElement();
 }
