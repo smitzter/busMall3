@@ -4,6 +4,7 @@ var products = ['babySweep', 'bag', 'banana', 'bathroom', 'boots', 'breakfast', 
 console.log(products);
 var attempts = '';
 var maxAttempts = 25;
+var lastRefresh = [];
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
@@ -53,8 +54,21 @@ function renderResponse (response) {
 
 
 function generateRandomProduct() {
-  var index = Math.floor(Math.random() * products.length);
-  return products[index];
+  do {
+    var index = Math.floor(Math.random() * products.length);
+    // return products[index];
+    var notImg = products[index];
+  } while (lastRefresh.includes(notImg));
+
+  lastRefresh.push(notImg);
+
+  if (lastRefresh.length === 6) {
+    lastRefresh.shift();
+    lastRefresh.shift();
+    lastRefresh.shift();
+    //make math random to choose random pics
+  }
+  return notImg;
 }
 
 function renderImg1(img1) {
