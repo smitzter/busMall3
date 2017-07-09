@@ -1,7 +1,38 @@
 'use strict';
 
-var products = ['babySweep', 'bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
-console.log(products);
+function Product(productName, path) {
+  this.productName = productName;
+  this.path = path;
+  this.shown = '';
+  this.clicked = '';
+}
+//array
+var products = [
+  new Product('babySweep', 'img/babySweep.jpg'),
+  new Product('bag', 'img/bag.jpg'),
+  new Product('banana', 'img/banana.jpg'),
+  new Product('bathroom', 'img/bathroom.jpg'),
+  new Product('boots', 'img/boots.jpg'),
+  new Product('breakfast', 'img/breakfast.jpg'),
+  new Product('bubblegum', 'img/bubblegum.jpg'),
+  new Product('chair', 'img/chair.jpg'),
+  new Product('cthulhu', 'img/cthulhu.jpg'),
+  new Product('dogDuck', 'img/dogDuck.jpg'),
+  new Product('dragon', 'img/dragon.jpg'),
+  new Product('pen', 'img/pen.jpg'),
+  new Product('petSweep', 'img/petSweep.jpg'),
+  new Product('scissors', 'img/scissors.jpg'),
+  new Product('shark', 'img/shark.jpg'),
+  new Product('tauntaun', 'img/tauntaun.jpg'),
+  new Product('unicorn', 'img/unicorn.jpg'),
+  new Product('usb', 'img/usb.jpg'),
+  new Product('waterCan', 'img/waterCan.jpg'),
+  new Product('wineGlass', 'img/wineGlass.jpg')
+];
+
+// var products = ['babySweep', 'bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
+// console.log(products);
+
 var attempts = '';
 var maxAttempts = 25;
 var lastRefresh = [];
@@ -73,17 +104,18 @@ function generateRandomProduct() {
 
 function renderImg1(img1) {
   var img = document.createElement('img');
-  img.setAttribute('src', 'img/' + img1 + '.jpg');
-  img.setAttribute('id', img1);
+  img.setAttribute('src', img1.path);
+  img.setAttribute('id', img1.productName);
   img.setAttribute('width', '200px');
   img.setAttribute('height', '200px');
   productImagesParent.appendChild(img);
 }
+console.log('img1: ' + img1.path);
 
 function renderImg2(img2) {
   var img = document.createElement('img');
-  img.setAttribute('src', 'img/' + img2 + '.jpg');
-  img.setAttribute('id', img2);
+  img.setAttribute('src', img2.path);
+  img.setAttribute('id', img2.productName);
   img.setAttribute('width', '200px');
   img.setAttribute('height', '200px');
   productImagesParent.appendChild(img);
@@ -91,8 +123,8 @@ function renderImg2(img2) {
 
 function renderImg3(img3) {
   var img = document.createElement('img');
-  img.setAttribute('src', 'img/' + img3 + '.jpg');
-  img.setAttribute('id', img3);
+  img.setAttribute('src', img3.path);
+  img.setAttribute('id', img3.productName);
   img.setAttribute('width', '200px');
   img.setAttribute('height', '200px');
   productImagesParent.appendChild(img);
