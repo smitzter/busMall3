@@ -66,23 +66,23 @@ function setup() {
 
 function clickedEventListener(event) {
   var productClicked = event.target.id;
+  console.log('A' + attempts);
   attempts++;
-  console.log('infunc: ' + productClicked);
-  console.log(attempts);
+  console.log('B' + attempts);
+  console.log(productClicked);
+  this.productName = productClicked;
+  console.log(this.productName);
+  this.clicked++;
+  console.log(productClicked);
+  console.log(this.productName);
+  console.log(this.clicked);
   setup();
-
-  if (attempts === maxAttempts) {
+  if (attempts >= maxAttempts) {
     return;
     renderResponse('25 reached');
-  } else {
-    renderResponse('not 25 yet');
   }
+  console.log(attempts);
 }
-
-function renderResponse (response) {
-  responseElement.textContent = response;
-}
-
 
 function generateRandomProduct() {
   do {
